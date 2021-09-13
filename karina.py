@@ -1,14 +1,14 @@
+from posixpath import split, splitext
 import requests
 import json
 import os
 
-
-def save_image(image_url, file_name):
+def save_image(image_url, file_name, ):
     img_response = requests.get(image_url)
     #요청 성공
     if img_response.status_code == 200:
         #파일 저장
-        with open(file_name, "wb") as fp:
+        with open( file_name, "wb") as fp:
             fp.write(img_response.content)
 
 #이미지 검색
@@ -30,16 +30,21 @@ if response.status_code != 200:
 #요청 성공 시
 else:
     count = 0
-    #현재 파이썬 경로 추출
-    current_dir_path = os.path.dirname(os.path.abspath(__file__))
+    '''
+    #현재 파이썬 파일 부모 디렉터리 추출
+    parents_path = os.path.dirname(os.path.abspath(__file__))
     #현재 파이썬 파일명 추출
     current_filename = os.path.basename(__file__)
+    split_filename = os.path.splitext(current_filename)
+    filename = split_filename[0]
+    #현재 파이썬 경로
+    current_path = __file__
 
     #파이썬 파일명 기준 디렉터리 생성
-    check_dir = current_dir_path + current_filename
-    if not os.path.isdir(check_dir):
-            os.makedirs(current_filename)
-    
+    if not os.path.isdir(parents_path):
+        os.makedirs(filename)
+        os.chdir(filename)
+    '''    
     for image_info in response.json()['documents']:
         print(f"[{count}th] image_url =", image_info['image_url'])
         #저장될 이미지 파일명
