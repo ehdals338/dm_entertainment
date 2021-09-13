@@ -24,7 +24,7 @@ response = requests.post(url, headers=headers, data=data)
 #요청 실패 시
 if response.status_code != 200:
     print("error! because ", response.json())
-    
+
 #요청 성공 시
 else:
     count = 0
@@ -35,3 +35,4 @@ else:
         file_name = "test_%d.jpg" %(count)
         #이미지 저장
         save_image(image_info['image_url'], file_name) 
+        

@@ -8,3 +8,4 @@ if img_response.status_code == 200:
     print("=====[이미지 저장]=====")
     with open("test.jpg", "wb") as fp:
         fp.write(img_response.content)
+        
